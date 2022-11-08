@@ -6,6 +6,7 @@ import { routes } from './Routes/PublicRoutes/Routes';
 function App() {
   return (
     <div className="App">
+      {/* #2f2fA2 */}
      <RouterProvider router={routes}></RouterProvider>
     </div>
   );
