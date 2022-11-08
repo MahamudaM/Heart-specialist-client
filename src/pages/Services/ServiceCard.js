@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ServiceCard = ({service}) => {
-    const {tital,name,picture,price}= service;
+    const {tital,name,picture,price,_id}= service;
     console.log(service)
     return (
         <div>
@@ -13,7 +13,7 @@ const ServiceCard = ({service}) => {
     <p>{tital.slice(0,100)} </p>
     <div className="card-actions justify-end">
       <p className='text-xl font-smeblod'>price : {price}$</p>
-      <Link to='/services'><button className="btn btn-primary">View Details</button></Link>
+      <Link to={`/services/${_id}`}><button className="btn btn-primary">View Details</button></Link>
     </div>
   </div>
 </div>
