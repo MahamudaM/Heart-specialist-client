@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ServiceCard from '../Services/ServiceCard';
 
 const Home = () => {
@@ -19,13 +20,15 @@ const Home = () => {
 <p className='text-2xl font-smeblod'>Override the digital divide with additional clickthroughs.</p>
           </div>
           <p>services {services.length}</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 my-5">
                       
         {
             services.map(service=><ServiceCard service={service}></ServiceCard>)
             
         }
           </div>
+          <Link to='/services'><button className="btn btn-outline btn-error my-5">More services</button></Link>
+          
         </div>
     );
 };
