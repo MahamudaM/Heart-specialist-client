@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
@@ -42,6 +43,7 @@ const loginHandler=event=>{
           
         </div>
       </form>
+      <p className='text-center mb-4'>New in website?pleace <Link to='/signup' className='text-[#f64c72]'>Sign up</Link></p>
     </div>
   </div>
 </div>
