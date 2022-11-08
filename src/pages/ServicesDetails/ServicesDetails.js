@@ -2,7 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 const ServicesDetails = () => {
-    const {tital,name,picture,price,details}=useLoaderData()
+    const {tital,name,picture,details}=useLoaderData()
     return (
         <div>
 {/* service details section */}
