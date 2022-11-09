@@ -8,6 +8,7 @@ const manuItem=
 <li><Link to='/'>home</Link></li>
 <li><Link to='/services'>services</Link></li>
 <li><Link to='/login'>Login</Link></li>
+<li><Link to='/myReviews'>My review</Link></li>
 </>
     return (
         
