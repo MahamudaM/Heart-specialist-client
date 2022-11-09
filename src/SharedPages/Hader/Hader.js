@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const Hader = () => {
+  const {user,logOut} = useContext(authContext)
+ const logOutHandl=()=>{
+logOut()
+.then(()=>{})
+.catch(error=>console.error(error))
+  }
 const manuItem= 
 <>
 <li><Link to='/'>home</Link></li>
 <li><Link to='/services'>services</Link></li>
-<li><Link to='/login'>Login</Link></li>
 <li><Link to='/myReviews'>My review</Link></li>
+<li>
+  {
+  user?.uid?
+  <button onClick={logOutHandl}>log out</button>
+  :
+  <Link to='/login'>Log in </Link>
+  }
+</li>
 </>
     return (
         

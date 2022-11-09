@@ -1,6 +1,7 @@
 import React from 'react';
 
-const reviewRowInfo = () => {
+const ReviewRowInfo = ({review}) => {
+  const {ServicesName,email}=review
     return (
         <tr>
         <th>
@@ -35,4 +36,4 @@ const reviewRowInfo = () => {
     );
 };
 
-export default reviewRowInfo;
+export default ReviewRowInfo;

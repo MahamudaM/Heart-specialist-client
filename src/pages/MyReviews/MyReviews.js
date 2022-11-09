@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
+import ReviewRowInfo from '../MyReviews/ReviewRowInfo'
+
 
 const MyReviews = () => {
     const {user} = useContext(authContext)
-const [review,setReview]=useState({})
-
+const [reviews,setReviews]=useState([])
+console.log(reviews)
     useEffect(()=>{
         fetch(`http://localhost:5000/review?email=${user?.email}`)
         .then(res=>res.json())
-        .then(data=>setReview(data))
+        .then(data=>setReviews(data))
     },[user?.email])
     return (
         <div>
            
-            <h>you have {review.length} review</h>
+            <h1>you have {reviews.length} review</h1>
             {/* review table */}
             <div className="overflow-x-auto w-full">
   <table className="table w-full">
@@ -33,7 +35,10 @@ const [review,setReview]=useState({})
     </thead>
     <tbody>
       {/* <!-- row 1 --> */}
-      
+
+      {
+        reviews?.map(review=><ReviewRowInfo key={review._id} review={review}></ReviewRowInfo>)
+      }
     </tbody>
     
     
