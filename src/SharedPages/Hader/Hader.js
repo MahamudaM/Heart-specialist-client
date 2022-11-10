@@ -20,6 +20,7 @@ const manuItem=
   user?.uid?
   <>
   <li><Link to='/myReviews'>My review</Link></li>
+  {/* <li><Link to= '/addService'>add service </Link></li> */}
   <button onClick={logOutHandl}>log out</button>
   </>
   :

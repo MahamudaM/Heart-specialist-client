@@ -3,13 +3,14 @@ import { useLoaderData } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 
 const AddService = () => {
-    const {tital,name,picture,details,_id,price}=useLoaderData()
+    const {name,picture,_id,price}=useLoaderData()
     const{user} = useContext(authContext)
     const addReviewHandler=event=>{
         event.preventDefault();
         const form =event.target;
         const userName = form.name.value;
-       const phone =form.phon.value
+       const phone =form.phone.value
+       const img = form.URL.value;
         const email = user?.email || "unRegister"
         // const userImg = user?.photoURL
         const message =form.message.value;
@@ -19,7 +20,9 @@ const AddService = () => {
           patientName:userName,
           email,
           message,
-         phone
+         phone,
+         img,
+         price
         }
       
         // if(phone.length>10){
@@ -41,7 +44,7 @@ const AddService = () => {
           // modal start
       
           // modal end
-          alert('add service')
+          alert('Add service successfully')
         }
       })
       .catch(error=>console.error(error))
@@ -52,7 +55,8 @@ const AddService = () => {
             <div className=''>
            <form onSubmit={addReviewHandler}>
            <input type="text" name="name" placeholder="name" className="input input-bordered  w-full max-w-xs mb-4" /><br/>
-           <input type="text" name="phone" placeholder="phon" defaultValue={user?.photoURL} className="input input-bordered w-full max-w-xs mb-4" required/><br/>
+           <input type="text" name="phone" placeholder="phon"  className="input input-bordered w-full max-w-xs mb-4" required/><br/>
+           <input type="url" name="URL" placeholder="user image"  className="input input-bordered w-full max-w-xs mb-4" required/><br/>
            <input type="email" name="email" placeholder="email" defaultValue={user?.email} className="input input-bordered w-full max-w-xs mb-4" readOnly/><br/>
            
            <textarea name="message" className="textarea textarea-bordered" placeholder="write comment" required></textarea><br/>
