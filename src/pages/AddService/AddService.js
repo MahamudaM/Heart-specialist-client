@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
+import useTital from '../../Hooks/useTital';
 
 const AddService = () => {
+  useTital('AddService')
     const {name,picture,_id,price}=useLoaderData()
     const{user} = useContext(authContext)
     const addReviewHandler=event=>{
@@ -21,7 +23,7 @@ const AddService = () => {
           email,
           message,
          phone,
-         img,
+         picture,
          price
         }
       

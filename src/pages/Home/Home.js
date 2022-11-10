@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
+import useTital from '../../Hooks/useTital';
 import AddServicCard from '../AddService/AddServicCard';
 import ServiceCard from '../Services/ServiceCard';
-
+import banarImg from '../Home/img/banar1.jpg'
+import doctorImg from '../Home/img/doctor.jpg'
 const Home = () => {
+  useTital('Home')
     const [services,setServices]=useState([])
     const {user} = useContext(authContext)
     useEffect(()=>{
@@ -23,7 +26,19 @@ console.log('add srvic',orderedService)
     },[user?.email])
     return (
         <div>
-          
+          {/* img */}
+          <div>
+          <div className="hero min-h-screen" style={{ backgroundImage: `url(${banarImg})` }}>
+  <div className="hero-overlay bg-opacity-60"></div>
+  <div className="hero-content text-center text-neutral-content">
+    <div className="max-w-md">
+      <h1 className="mb-5 text-5xl font-bold">Care your heart ,<br/>stay healthy</h1>
+      <p className="mb-5">Globally harness multimedia based collaboration and idea-sharing with backend products. Continually whiteboard superior opportunities via covalent scenarios.</p>
+      <button className="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
+          </div>
           {/* srervic */}
           <div>
           <div className='text-center'>
@@ -43,6 +58,19 @@ console.log('add srvic',orderedService)
           <Link to='/services'><button className="btn btn-outline btn-error my-5">See All</button></Link>
           
           </div>
+           {/* side img and text */}
+          
+           <div className="hero  min-h-screen bg-base-300">
+           
+  <div className="hero-content flex-col lg:flex-row">
+    <img src={doctorImg} alt='' className="max-w-sm rounded-lg shadow-2xl" />
+    <div>
+      <h1 className="text-5xl font-bold">My duty is to serve you</h1>
+      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      <button className="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
           {/* service end */}
           {
             user?.uid? 
@@ -55,6 +83,8 @@ console.log('add srvic',orderedService)
             :
             ''
           }
+         
+          
         </div>
     );
 };
