@@ -14,11 +14,14 @@ const manuItem=
 <>
 <li><Link to='/'>home</Link></li>
 <li><Link to='/services'>services</Link></li>
-<li><Link to='/myReviews'>My review</Link></li>
+
 <li>
   {
   user?.uid?
+  <>
+  <li><Link to='/myReviews'>My review</Link></li>
   <button onClick={logOutHandl}>log out</button>
+  </>
   :
   <Link to='/login'>Log in </Link>
   }

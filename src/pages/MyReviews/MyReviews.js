@@ -12,40 +12,130 @@ console.log(reviews)
         .then(res=>res.json())
         .then(data=>setReviews(data))
     },[user?.email])
-    return (
-        <div>
-           
-            <h1>you have {reviews.length} review</h1>
-            {/* review table */}
-            <div className="overflow-x-auto w-full">
-  <table className="table w-full">
-    {/* <!-- head --> */}
-    <thead>
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* <!-- row 1 --> */}
 
-      {
-        reviews?.map(review=><ReviewRowInfo key={review._id} review={review}></ReviewRowInfo>)
-      }
-    </tbody>
+     // event handler for delete review
+  const deleteHandl=id=>{
+    const proceed = window.confirm('delete review')
+    if(proceed){
+      fetch(`http://localhost:5000/review/${id}`,{
+        method:'DELETE'
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data)
+        if(data.deletedCount>0){
+         
+          const remaining = reviews.filter(review=>review._id !== id)
+          setReviews(remaining)
+          alert('deleted successfully')
+        }
+      })
+    }
+  }
+const textUpdateHandler = (id,updatMessage)=>{
+  fetch(`http://localhost:5000/review/${id}`,{
+    method:'PATCH',
+    headers:{
+      'content-type': 'application/json'
+    },
+    body:JSON.stringify({status:'approved'})
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data)
+    if(data.modifiedCount>0){
+      const remaining =reviews.filter(review=>review._id!==id)
+      const approving =reviews.find(rev=>rev._id===id)
+      approving.message=updatMessage
+      const newReviews = [approving,...remaining]
+      setReviews(newReviews)
+    }
+  })
+}
+
+
+// start review table
+if(reviews.length> 0){
+return <div className="overflow-x-auto w-full">
+<table className="table w-full">
+  {/* <!-- head --> */}
+  <thead>
+    <tr>
+      <th>
+        <label>
+          {/* <input type="checkbox" className="checkbox" /> */}
+        </label>
+      </th>
+      <th>Reviewer</th>
+      <th>Name</th>
+      {/* <th>Favorite Color</th> */}
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {/* <!-- row 1 --> */}
+
+    {
+      reviews?.map(review=><ReviewRowInfo
+         key={review._id} 
+        review={review}
+        deleteHandl={deleteHandl}
+        textUpdateHandler={textUpdateHandler}
+      ></ReviewRowInfo>)
+    }
+  </tbody>
+  
+  
+</table>
+  </div>
+}
+else{
+return <p className='text-5xl text-center my-10'>no review added</p>
+}
+
+
+
+// end
+
+
+  //   return (
+  //       <div>
+           
+  //           <h1>you have {reviews.length} review</h1>
+  //           {/* review table */}
+  //  <div className="overflow-x-auto w-full">
+  // <table className="table w-full">
+  //   {/* <!-- head --> */}
+  //   <thead>
+  //     <tr>
+  //       <th>
+  //         <label>
+  //           <input type="checkbox" className="checkbox" />
+  //         </label>
+  //       </th>
+  //       <th>Reviewer</th>
+  //       <th>Name</th>
+  //       <th>Favorite Color</th>
+  //       <th></th>
+  //     </tr>
+  //   </thead>
+  //   <tbody>
+  //     {/* <!-- row 1 --> */}
+
+  //     {
+  //       reviews?.map(review=><ReviewRowInfo
+  //          key={review._id} 
+  //         review={review}
+  //         deleteHandl={deleteHandl}
+  //       ></ReviewRowInfo>)
+  //     }
+  //   </tbody>
     
     
-  </table>
-</div>
-        </div>
-    );
+  // </table>
+  //   </div>
+  //       </div>
+  //   );
 };
 
 export default MyReviews;
