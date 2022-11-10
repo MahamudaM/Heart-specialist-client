@@ -8,7 +8,7 @@ const AuthProvider = ({children}) => {
 const [user,setUser]=useState(null)
 const [loader,setLoader]=useState(true)
 
-const creatUsre =(email,password)=>{
+const registerUsre =(email,password)=>{
     setLoader(true);
     return createUserWithEmailAndPassword(auth,email,password);
 }
@@ -37,7 +37,7 @@ useEffect(()=>{
         unSubscribe();
     }
 },[])
-const authInfo = {user,creatUsre,loader,logInEmailAndPass,logOut,googleSingUp}
+const authInfo = {user,registerUsre,loader,logInEmailAndPass,logOut,googleSingUp}
     return (
         <div>
            <authContext.Provider value={authInfo}>

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layouts/Main";
 import AddService from "../../pages/AddService/AddService";
+import Blogs from "../../pages/Blogs/Blogs";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import MyReviews from "../../pages/MyReviews/MyReviews";
@@ -46,6 +47,10 @@ export const routes=createBrowserRouter([
                 element:<PrivetRoutes><AddService></AddService></PrivetRoutes>,
                 // loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
             },
+            {
+                path:'/blog',
+                element:<Blogs></Blogs>
+            }
             
         ]
     }

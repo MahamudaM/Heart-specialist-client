@@ -2,6 +2,9 @@ import userEvent from '@testing-library/user-event';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
+// 
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceCard = ({service}) => {
     const {tital,name,picture,price,_id}= service;
@@ -9,8 +12,13 @@ const ServiceCard = ({service}) => {
     // console.log(service)
     return (
         <div>
+          <PhotoProvider>
             <div className="card w-96 bg-base-100 shadow-xl">
+            
+      <PhotoView src={picture}>
   <figure><img src={picture} alt="Shoes" /></figure>
+  </PhotoView>
+   
   <div className="card-body">
     <h2 className="card-title">{name}</h2>
     <p>{tital.slice(0,100)} </p>
@@ -30,6 +38,7 @@ const ServiceCard = ({service}) => {
     </div>
   </div>
 </div>
+</PhotoProvider>
         </div>
     );
 };

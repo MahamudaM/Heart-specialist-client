@@ -53,7 +53,24 @@ const googleSingInHandl = ()=>{
   .then(result=>{
     const user=result.user;
     console.log(user)
-    Navigate(from,{replace:true})
+    const currentUser = {
+      email:user.email
+    }
+    console.log(currentUser)
+    // jwt token
+    fetch('http://localhost:5000/jwt',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(currentUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      localStorage.setItem('secret-token',data.token)
+ Navigate(from,{replace:true});
+    })
   })
   .catch(error=>console.error(error))
 }

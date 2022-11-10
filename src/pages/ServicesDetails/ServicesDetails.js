@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 import useTital from '../../Hooks/useTital';
@@ -7,7 +7,14 @@ const ServicesDetails = () => {
   useTital('ServicesDetails')
     const {tital,name,picture,details,_id}=useLoaderData()
     const{user} = useContext(authContext)
-
+// review load
+const [allReview,setAllReview]=useState([])
+    console.log(allReview)
+useEffect(()=>{
+    fetch('http://localhost:5000/review')
+    .then(res=>res.json())
+    .then(data=>setAllReview(data))
+},[])
 
 // event handlr for add reviw
 const addReviewHandler=event=>{
@@ -49,6 +56,7 @@ fetch('http://localhost:5000/review',{
     // modal end
     alert('add review')
   }
+  
 })
 .catch(error=>console.error(error))
 }
@@ -77,6 +85,8 @@ fetch('http://localhost:5000/review',{
 </div>
 
             </div>
+            {/* show all review section */}
+
 
            {/* Review section */}
            {

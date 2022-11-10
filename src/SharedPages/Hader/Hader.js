@@ -14,7 +14,7 @@ const manuItem=
 <>
 <li><Link to='/'>home</Link></li>
 <li><Link to='/services'>services</Link></li>
-
+<li><Link to='/blog'>Blog</Link></li>
 <li>
   {
   user?.uid?
