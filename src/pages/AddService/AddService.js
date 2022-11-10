@@ -5,7 +5,7 @@ import useTital from '../../Hooks/useTital';
 
 const AddService = () => {
   useTital('AddService')
-    const {name,picture,_id,price}=useLoaderData()
+    // const {name,picture,_id,price}=useLoaderData()
     const{user} = useContext(authContext)
     const addReviewHandler=event=>{
         event.preventDefault();
@@ -13,17 +13,19 @@ const AddService = () => {
         const userName = form.name.value;
        const phone =form.phone.value
        const img = form.URL.value;
+       const price =form.price.value
+       const serviceName = form.serviceName.value
         const email = user?.email || "unRegister"
         // const userImg = user?.photoURL
         const message =form.message.value;
         const orderService ={
-          services :_id,
-          ServicesName:name,
+          
+          
           patientName:userName,
           email,
           message,
          phone,
-         picture,
+         img,
          price
         }
       
@@ -56,10 +58,12 @@ const AddService = () => {
         <div>
             <div className=''>
            <form onSubmit={addReviewHandler}>
-           <input type="text" name="name" placeholder="name" className="input input-bordered  w-full max-w-xs mb-4" /><br/>
+           <input type="text" name="name" placeholder=" name" className="input input-bordered  w-full max-w-xs mb-4" /><br/>
            <input type="text" name="phone" placeholder="phon"  className="input input-bordered w-full max-w-xs mb-4" required/><br/>
            <input type="url" name="URL" placeholder="user image"  className="input input-bordered w-full max-w-xs mb-4" required/><br/>
            <input type="email" name="email" placeholder="email" defaultValue={user?.email} className="input input-bordered w-full max-w-xs mb-4" readOnly/><br/>
+           <input type="text" name="price" placeholder="price" className="input input-bordered  w-full max-w-xs mb-4" /><br/>
+           <input type="text" name="serviceName" placeholder="service name"  className="input input-bordered w-full max-w-xs mb-4" required/><br/>
            
            <textarea name="message" className="textarea textarea-bordered" placeholder="write comment" required></textarea><br/>
            <button type='submit' className="btn btn-wide" >Add service</button>

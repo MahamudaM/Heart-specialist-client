@@ -20,7 +20,7 @@ const ServiceCard = ({service}) => {
       {
         user?.uid?
         <>
-         <Link to={`/addService/${_id}`}><button className="btn btn-primary">add services</button></Link>
+         {/* <Link to={`/addService/${_id}`}><button className="btn btn-primary">add services</button></Link> */}
       <Link to={`/services/${_id}`}><button className="btn btn-primary">Show Details</button></Link>
         </>
         :

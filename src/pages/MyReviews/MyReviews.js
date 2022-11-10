@@ -6,12 +6,21 @@ import ReviewRowInfo from '../MyReviews/ReviewRowInfo'
 
 const MyReviews = () => {
   useTital('MyReviews')
-    const {user} = useContext(authContext)
+    const {user,logOut} = useContext(authContext)
 const [reviews,setReviews]=useState([])
 console.log(reviews)
     useEffect(()=>{
-        fetch(`http://localhost:5000/review?email=${user?.email}`)
-        .then(res=>res.json())
+        fetch(`http://localhost:5000/review?email=${user?.email}`,{
+          headers:{
+            authorization: `Bearer ${localStorage.getItem('secret-token')}`
+          }
+        })
+        .then(res=>{
+          if(res.status === 401 || res.status === 403){
+            logOut()
+          }
+          return res.json()
+        })
         .then(data=>setReviews(data))
     },[user?.email])
 
@@ -100,44 +109,7 @@ return <p className='text-5xl text-center my-10'>no review added</p>
 // end
 
 
-  //   return (
-  //       <div>
-           
-  //           <h1>you have {reviews.length} review</h1>
-  //           {/* review table */}
-  //  <div className="overflow-x-auto w-full">
-  // <table className="table w-full">
-  //   {/* <!-- head --> */}
-  //   <thead>
-  //     <tr>
-  //       <th>
-  //         <label>
-  //           <input type="checkbox" className="checkbox" />
-  //         </label>
-  //       </th>
-  //       <th>Reviewer</th>
-  //       <th>Name</th>
-  //       <th>Favorite Color</th>
-  //       <th></th>
-  //     </tr>
-  //   </thead>
-  //   <tbody>
-  //     {/* <!-- row 1 --> */}
-
-  //     {
-  //       reviews?.map(review=><ReviewRowInfo
-  //          key={review._id} 
-  //         review={review}
-  //         deleteHandl={deleteHandl}
-  //       ></ReviewRowInfo>)
-  //     }
-  //   </tbody>
-    
-    
-  // </table>
-  //   </div>
-  //       </div>
-  //   );
+ 
 };
 
 export default MyReviews;

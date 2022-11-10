@@ -1,5 +1,6 @@
+
 import React, { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 import useTital from '../../Hooks/useTital';
 
@@ -26,8 +27,10 @@ const from = location.state?.from?.pathname || '/'
             })
             .catch(error=>console.error(error))
     }
+    
     return (
         <div>
+          
                <div className="hero min-h-screen bg-base-300">
   <div className="hero-content flex-col lg:flex-row-reverse">
     {/* <div className="text-center lg:text-left">      
@@ -58,12 +61,17 @@ const from = location.state?.from?.pathname || '/'
           </label>
         </div>
         <div className="form-control mt-6">
-            <input type='submit' className="btn btn-primary" value='Login'></input>
-          
+            <input type='submit' className="btn btn-primary " value='Login'></input>
+            
+         
         </div>
       </form>
+      <p className='text-center mb-4'>Have an account? <Link to='/login' className='text-[#f64c72]'>Log in</Link></p>
+
     </div>
+    
   </div>
+  
 </div>
         </div>
     );

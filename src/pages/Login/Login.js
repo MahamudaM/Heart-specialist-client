@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
@@ -5,7 +6,7 @@ import useTital from '../../Hooks/useTital';
 
 const Login = () => {
   useTital('Login')
-const {logInEmailAndPass} = useContext(authContext)
+const {logInEmailAndPass,googleSingUp} = useContext(authContext)
 
 const Navigate=useNavigate()
 const location = useLocation()
@@ -19,15 +20,43 @@ const loginHandler=event=>{
   logInEmailAndPass(email,password)
   .then(result=>{
     const user = result.user
-    console.log(user)
+    console.log(user.email)
     form.reset()
-    Navigate(from,{replace:true});
+    const currentUser = {
+      email:user.email
+    }
+    console.log(currentUser)
+    // jwt token
+    fetch('http://localhost:5000/jwt',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(currentUser)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      localStorage.setItem('secret-token',data.token)
+ Navigate(from,{replace:true});
+    })
+   
 })
 .catch(error=>console.error(error))
 
 
 }
-
+// google signup 
+const googleProvider = new GoogleAuthProvider()
+const googleSingInHandl = ()=>{
+  googleSingUp(googleProvider)
+  .then(result=>{
+    const user=result.user;
+    console.log(user)
+    Navigate(from,{replace:true})
+  })
+  .catch(error=>console.error(error))
+}
     return (
         <div>
             <div className="hero min-h-screen bg-base-300">
@@ -54,8 +83,12 @@ const loginHandler=event=>{
           </label>
         </div>
         <div className="form-control mt-6">
-            <input type='submit' className="btn btn-primary" value='Login'></input>
-          
+            <input type='submit' className="btn btn-primary mb-5" value='Login'></input>
+            <p className='text-center mb-3'>or</p>
+            <button className="btn gap-2" onClick={googleSingInHandl}>
+   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+   sign up with google
+ </button>
         </div>
       </form>
       <p className='text-center mb-4'>New in website?pleace <Link to='/signup' className='text-[#f64c72]'>Sign up</Link></p>
