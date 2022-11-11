@@ -11,7 +11,7 @@ const Home = () => {
     const [services,setServices]=useState([])
     const {user} = useContext(authContext)
     useEffect(()=>{
-        fetch('http://localhost:5000/service')
+        fetch('https://backend-database-server-a11.vercel.app/service')
         .then(res=>res.json())
         .then(data=>setServices(data))
     },[]
@@ -20,7 +20,7 @@ const Home = () => {
     const [orderedService,setOrderedService]=useState([])
 console.log('add srvic',orderedService)
     useEffect(()=>{
-        fetch(`http://localhost:5000/addService?email=${user?.email}`)
+        fetch(`https://backend-database-server-a11.vercel.app/addService?email=${user?.email}`)
         .then(res=>res.json())
         .then(data=>setOrderedService(data))
     },[user?.email])

@@ -17,7 +17,7 @@ const Services = () => {
 const [orderedService,setOrderedService]=useState([])
 console.log('add srvic',orderedService)
     useEffect(()=>{
-        fetch(`http://localhost:5000/addServices`)
+        fetch(`https://backend-database-server-a11.vercel.app/addServices`)
         .then(res=>res.json())
         .then(data=>setOrderedService(data))
     },[])

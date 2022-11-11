@@ -13,7 +13,7 @@ const [updateReview,setUpdateRevieq]=useState()
  const form =event.target;
     const message =form.message.value;
     setUpdateRevieq(message)
-    fetch(`http://localhost:5000/reviews/${review._id}`,{
+    fetch(`https://backend-database-server-a11.vercel.app/reviews/${review._id}`,{
       method:'PUT',
       headers:{
         'content-type':'application/json'
