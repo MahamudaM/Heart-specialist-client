@@ -3,6 +3,7 @@ import React from 'react';
 const Blogs = () => {
     return (
         <div>
+          <div  className="w-1/2 text-center my-10 ml-20  grid  gap-4 place-content-center" >
             <div className="collapse  collapse-plus border border-base-300 bg-base-100 rounded-box">
   <input type="checkbox" /> 
   <div className="collapse-title text-xl font-medium">
@@ -43,6 +44,7 @@ Data could be stored as document-oriented, column oriented, graph-based or organ
   <div className="collapse-content"> 
     <p>NodeJS internally manages a limited thread pool which handles multiple client requests based on which thread is avaiable in the pool to process the request.because programmers cannot create threads on the fly to handle new incoming requests.NodeJS server uses an EventQueue, which queues incoming client requests and an EventLoop which is an infinite loop that receives requests and processes them. This EventLoop is single threaded and acts as a listener for the EventQueue which processes incoming requests based on FIFO policy.When a new request comes in, NodeJS checks if it requires any blocking IO operations, if not, the EventLoop processes it and sends the response back to the client directly. If yes, then the request is forwarded to the thread manager, which then based on an algorithm, picks up an idle thread from the pool and lets it process the request. After completion of the request processing operation, the thread, returns the response back to the EventLoop which is then forwarded to the client. Thus, even if an incoming request needs blocking IO, the thread pool allows it to run asynchronously in the background without blocking the EventLoop and it gives a seamless experience of NodeJS handling multiple incoming requests concurrently without any persistent delays or bottlenecks.</p>
   </div>
+</div>
 </div>
         </div>
     );

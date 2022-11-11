@@ -5,8 +5,8 @@ const Footer = () => {
         <div>
            <footer className="footer p-10 bg-base-200 text-base-content">
   <div>
-   <p>Take care your heart</p>
-    <p>ACME Industries Ltd.<br/>Providing reliable tech since 1992</p>
+   <p className='text-2xl font-semibold'>Heart Care</p>
+    <p>KEEP UP TO DATE WITH <br/>THE LATEST NEWS</p>
   </div> 
   <div>
     <a href='/' className="link link-hover" >Branding</a> 

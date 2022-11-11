@@ -1,4 +1,4 @@
-import userEvent from '@testing-library/user-event';
+
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
@@ -16,7 +16,7 @@ const ServiceCard = ({service}) => {
             <div className="card w-96 bg-base-100 shadow-xl">
             
       <PhotoView src={picture}>
-  <figure><img src={picture} alt="Shoes" /></figure>
+  <img src={picture} alt="Shoes"  className='h-1/3'/>
   </PhotoView>
    
   <div className="card-body">

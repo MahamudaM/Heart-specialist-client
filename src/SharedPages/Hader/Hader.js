@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const Hader = () => {
   const {user,logOut} = useContext(authContext)
+  
  const logOutHandl=()=>{
 logOut()
 .then(()=>{})

@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const UpdateReview = () => {
+  const review =useLoaderData()
+const [updateReview,setUpdateRevieq]=useState()
 
+  const updateReviewHandler=event=>{
+    event.preventDefault();
+ console.log(updateReview)
+ const form =event.target;
+    const message =form.message.value;
+    setUpdateRevieq(message)
+    fetch(`http://localhost:5000/reviews/${review._id}`,{
+      method:'PUT',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify({message})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+     if(data.modifiedCount>0){
+      toast("successful update review");
+     }
+    })
+  }
+  
+  
     return (
-        <div>
-
-          <p>data</p>
-           {/* The button to open modal */}
-<label htmlFor="my-modal" className="btn">open modal</label>
-
-{/* Put this part before </body> tag */}
-<input type="checkbox" id="my-modal" className="modal-toggle" />
-<div className="modal">
-  <div className="modal-box">
-    <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-    <p className="py-4">dsvfa</p>
-    <div className="modal-action">
-      <label htmlFor="my-modal" className="btn">Yay!</label>
-    </div>
-  </div>
-</div>
+     
+      
+        <div className='my-10 ml-20'>
+          <p>{review.ServicesName}</p>
+          <form onSubmit={updateReviewHandler}>
+           <textarea name="message"  className="textarea textarea-bordered" placeholder="write comment" required></textarea><br/>
+           <button type='submit' className="btn " >update</button>
+           </form>
+         
+           <ToastContainer />
         </div>
+        
     );
 };
 

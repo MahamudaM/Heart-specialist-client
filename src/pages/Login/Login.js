@@ -27,7 +27,7 @@ const loginHandler=event=>{
     }
     console.log(currentUser)
     // jwt token
-    fetch('http://localhost:5000/jwt',{
+    fetch('https://backend-database-server-a11.vercel.app/jwt',{
       method:'POST',
       headers:{
         'content-type':'application/json'
@@ -58,7 +58,7 @@ const googleSingInHandl = ()=>{
     }
     console.log(currentUser)
     // jwt token
-    fetch('http://localhost:5000/jwt',{
+    fetch('https://backend-database-server-a11.vercel.app/jwt',{
       method:'POST',
       headers:{
         'content-type':'application/json'
@@ -88,13 +88,13 @@ const googleSingInHandl = ()=>{
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="text" name ='email' placeholder="email" className="input input-bordered" />
+          <input type="email" name ='email' placeholder="email" className="input input-bordered" />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
           </label>
-          <input type="text" name='password' placeholder="password" className="input input-bordered" />
+          <input type="password" name='password' placeholder="password" className="input input-bordered" />
           <label className="label">
             <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
           </label>

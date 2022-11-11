@@ -34,7 +34,7 @@ export const routes=createBrowserRouter([
             {
                 path:'/services/:id',
                 element:<ServicesDetails></ServicesDetails>,
-                loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
+                loader:({params})=>fetch(`https://backend-database-server-a11.vercel.app/services/${params.id}`)
                 
             },
             {
@@ -45,11 +45,16 @@ export const routes=createBrowserRouter([
             {
                 path:'/addService',
                 element:<PrivetRoutes><AddService></AddService></PrivetRoutes>,
-                // loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
+                // loader:({params})=>fetch(`https://backend-database-server-a11.vercel.app/services/${params.id}`)
             },
             {
                 path:'/blog',
                 element:<Blogs></Blogs>
+            },
+            {
+                path:'/update/:id',
+                element:<UpdateReview></UpdateReview>,
+                loader:({params})=>fetch(`http://localhost:5000/reviews/${params.id}`)
             }
             
         ]

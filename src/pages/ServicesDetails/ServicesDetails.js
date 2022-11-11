@@ -1,17 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 import useTital from '../../Hooks/useTital';
-
+import AllReview from '../Services/AllReview/AllReview';
+// 
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const ServicesDetails = () => {
   useTital('ServicesDetails')
+ 
     const {tital,name,picture,details,_id}=useLoaderData()
     const{user} = useContext(authContext)
-// review load
+    
+//all review load
 const [allReview,setAllReview]=useState([])
-    console.log(allReview)
+    console.log('all review',allReview)
 useEffect(()=>{
-    fetch('http://localhost:5000/review')
+    fetch('http://localhost:5000/reviews')
     .then(res=>res.json())
     .then(data=>setAllReview(data))
 },[])
@@ -23,6 +28,7 @@ const addReviewHandler=event=>{
   const userName = form.name.value;
   const img = form.URL.value;
   const email = user?.email || "unRegister"
+  const date=new Date().getTime();
   // const userImg = user?.photoURL
   const message =form.message.value;
   const review ={
@@ -31,15 +37,15 @@ const addReviewHandler=event=>{
     patientName:userName,
     email,
     img,
-    message,
-   
+    message:message,
+    date
   }
 
   // if(phone.length>10){
   //   alert('number should be 10 carecter')
   // }
 
-fetch('http://localhost:5000/review',{
+fetch('https://backend-database-server-a11.vercel.app/review',{
   method:'POST',
   headers:{
     'content-type':'application/json'
@@ -53,8 +59,11 @@ fetch('http://localhost:5000/review',{
     form.reset();
     // modal start
 
+
+
+ toast("successful add Review");
     // modal end
-    alert('add review')
+    // alert('add review')
   }
   
 })
@@ -87,27 +96,54 @@ fetch('http://localhost:5000/review',{
             </div>
             {/* show all review section */}
 
+            <div className=" w-full">
+  <table className="table w-full">
+    {/* <!-- head --> */}
+    <thead>
+      <tr>
+        <th>
+          <label>
+            <input type="checkbox" className="checkbox" />
+          </label>
+        </th>
+        <th>Reviewer Name</th>
+        <th>Service</th>
+        <th>Review</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    {
+  allReview.map(allrev=><AllReview allrev={allrev} key={allrev._id}></AllReview>)
+}
+    </tbody>
+    {/* <!-- foot --> */}
+    
+  </table>
+</div>
+
 
            {/* Review section */}
            {
             user?.uid? 
-            <div className=''>
-           <form onSubmit={addReviewHandler}>
-           <input type="text" name="name" placeholder="name" className="input input-bordered  w-full max-w-xs mb-4" /><br/>
-           <input type="url" name="URL" placeholder="user image" defaultValue={user?.photoURL} className="input input-bordered w-full max-w-xs mb-4" required/><br/>
+            <div className='my-20'>
+           <form onSubmit={addReviewHandler} className='ml-20'>
+           <input type="text" name="name" placeholder="name" className="input input-bordered  w-full max-w-xs mb-4" required/><br/>
+           <input type="url" name="URL" placeholder="image" defaultValue={user?.photoURL} className="input input-bordered w-full max-w-xs mb-4" required/><br/>
            <input type="email" name="email" placeholder="email" defaultValue={user?.email} className="input input-bordered w-full max-w-xs mb-4" readOnly/><br/>
            
-           <textarea name="message" className="textarea textarea-bordered" placeholder="write comment" required></textarea><br/>
+           <textarea name="message" className="textarea textarea-bordered mb-4" placeholder="write comment" required></textarea><br/>
            <button type='submit' className="btn btn-wide" >Add Review</button>
            </form>
            </div>
             :
-            <p>pleace <Link to='/login' className='text-[#f64c72]'>Log In</Link> to add a review</p>
+            <p className='text-4xl text-center'>pleace <Link to='/login' className='text-[#f64c72]'>Log In</Link> to add a review</p>
 
            }
 
          
-
+<ToastContainer />
         </div>
     );
 };

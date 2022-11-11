@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { authContext } from '../../Context/AuthProvider/AuthProvider';
 import useTital from '../../Hooks/useTital';
 import ReviewRowInfo from '../MyReviews/ReviewRowInfo'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyReviews = () => {
   useTital('MyReviews')
@@ -10,7 +11,7 @@ const MyReviews = () => {
 const [reviews,setReviews]=useState([])
 console.log(reviews)
     useEffect(()=>{
-        fetch(`http://localhost:5000/review?email=${user?.email}`,{
+        fetch(`https://backend-database-server-a11.vercel.app/review?email=${user?.email}`,{
           headers:{
             authorization: `Bearer ${localStorage.getItem('secret-token')}`
           }
@@ -26,9 +27,9 @@ console.log(reviews)
 
      // event handler for delete review
   const deleteHandl=id=>{
-    const proceed = window.confirm('delete review')
+    const proceed = window.confirm('Delete review')
     if(proceed){
-      fetch(`http://localhost:5000/review/${id}`,{
+      fetch(`https://backend-database-server-a11.vercel.app/review/${id}`,{
         method:'DELETE'
       })
       .then(res=>res.json())
@@ -38,48 +39,29 @@ console.log(reviews)
          
           const remaining = reviews.filter(review=>review._id !== id)
           setReviews(remaining)
-          alert('deleted successfully')
+          toast("successful Delete review");
         }
       })
     }
   }
-const textUpdateHandler = (id,updatMessage)=>{
-  fetch(`http://localhost:5000/review/${id}`,{
-    method:'PATCH',
-    headers:{
-      'content-type': 'application/json'
-    },
-    body:JSON.stringify({status:'approved'})
-  })
-  .then(res=>res.json())
-  .then(data=>{
-    console.log(data)
-    if(data.modifiedCount>0){
-      const remaining =reviews.filter(review=>review._id!==id)
-      const approving =reviews.find(rev=>rev._id===id)
-      approving.message=updatMessage
-      const newReviews = [approving,...remaining]
-      setReviews(newReviews)
-    }
-  })
-}
+
 
 
 // start review table
 if(reviews.length> 0){
-return <div className="overflow-x-auto w-full">
+return <div className=" w-full">
 <table className="table w-full">
   {/* <!-- head --> */}
   <thead>
     <tr>
       <th>
         <label>
-          {/* <input type="checkbox" className="checkbox" /> */}
+       
         </label>
       </th>
       <th>Reviewer</th>
-      <th>Name</th>
-      {/* <th>Favorite Color</th> */}
+      <th>service name</th>
+      <th>Review</th>
       <th></th>
     </tr>
   </thead>
@@ -91,13 +73,14 @@ return <div className="overflow-x-auto w-full">
          key={review._id} 
         review={review}
         deleteHandl={deleteHandl}
-        textUpdateHandler={textUpdateHandler}
+        // textUpdateHandler={textUpdateHandler}
       ></ReviewRowInfo>)
     }
   </tbody>
   
-  
+ 
 </table>
+<ToastContainer />
   </div>
 }
 else{

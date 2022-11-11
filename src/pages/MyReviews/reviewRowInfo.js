@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const ReviewRowInfo = ({review,deleteHandl,textUpdateHandler}) => {
@@ -13,7 +14,7 @@ const ReviewRowInfo = ({review,deleteHandl,textUpdateHandler}) => {
   const {ServicesName,email,services,_id,message,img,patientName}=review
   const [serviceReview,setServiceReview] = useState({})
   useEffect(()=>{
-    fetch(`http://localhost:5000/services/${services}`)
+    fetch(`https://backend-database-server-a11.vercel.app/services/${services}`)
     .then(res=>res.json())
   .then(data=>setServiceReview(data));
   },[services])
@@ -47,28 +48,27 @@ const ReviewRowInfo = ({review,deleteHandl,textUpdateHandler}) => {
         </td>
         <td>
         {ServicesName}
-          <br/>
-          <span className="badge badge-ghost badge-sm">{message}</span>
+         
         </td>
-        {/* <td>Purple</td> */}
+        <td>{message}</td>
         <th>
           
-          
-          <label htmlFor="my-modal" className="btn" >update</label>
+          <Link to={`/update/${_id}`}><button>edit review</button> </Link>
+          {/* <label htmlFor="my-modal" className="btn" >update</label> */}
 
 {/* Put this part before </body> tag */}
-<input type="checkbox" id="my-modal" className="modal-toggle" />
+{/* <input type="checkbox" id="my-modal" className="modal-toggle" />
 <div className="modal">
   <div className="modal-box">
     <h3 className="font-bold text-lg">{message}</h3>
     {/* <p className="py-4">{message}</p> */}
-    <textarea name="updateMessag" className="textarea textarea-bordered"  placeholder="write comment" required></textarea>
+    {/* <textarea name="updateMessag" className="textarea textarea-bordered"  placeholder="write comment" required></textarea>
     <button  className="btn" onClick={()=>textUpdateHandler(_id,updatMessage)} onChange={handleMessageChange}>update text</button>
     <div className="modal-action">
       <label htmlFor="my-modal" className="btn">Yay!</label>
     </div>
   </div>
-</div>
+</div>  */}
         </th>
       </tr>
     

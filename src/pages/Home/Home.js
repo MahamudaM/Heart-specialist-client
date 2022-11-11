@@ -11,7 +11,7 @@ const Home = () => {
     const [services,setServices]=useState([])
     const {user} = useContext(authContext)
     useEffect(()=>{
-        fetch('http://localhost:5000/services')
+        fetch('http://localhost:5000/service')
         .then(res=>res.json())
         .then(data=>setServices(data))
     },[]
@@ -27,13 +27,13 @@ console.log('add srvic',orderedService)
     return (
         <div>
           {/* img */}
-          <div>
-          <div className="hero min-h-screen" style={{ backgroundImage: `url(${banarImg})` }}>
+          <div className=''>
+          <div className="hero min-h-screen mb-10" style={{ backgroundImage: `url(${banarImg})` }}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Care your heart ,<br/>stay healthy</h1>
-      <p className="mb-5">Globally harness multimedia based collaboration and idea-sharing with backend products. Continually whiteboard superior opportunities via covalent scenarios.</p>
+      <p className="mb-5">Globally harness multimedia based collaboration and idea-sharing with backend products.Continually whiteboard superior opportunities via covalent scenarios. </p>
       <button className="btn btn-primary">Get Started</button>
     </div>
   </div>
@@ -42,12 +42,12 @@ console.log('add srvic',orderedService)
           {/* srervic */}
           <div>
           <div className='text-center'>
-            <p className='text-5xl font-smeblod'>our services</p>
+            <p className='text-5xl font-smeblod mb-4 mt-20'>our services</p>
 
-<p className='text-2xl font-smeblod'>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.</p>
-<p className='text-2xl font-smeblod'>Override the digital divide with additional clickthroughs.</p>
+<p className='text-2xl font-smeblod'>Dr junaer was an original thinker and was involved in the development of various cardiothoracic devices.</p>
+<p className='text-2xl font-smeblod mb-10'>Override the digital divide with additional clickthroughs.</p>
           </div>
-          <p>services {services.length}</p>
+          
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 my-5">
                       
         {
@@ -59,17 +59,17 @@ console.log('add srvic',orderedService)
           
           </div>
           <div className='text-center'>
-         <Link to='/services'><button className="btn btn-outline btn-error my-5 ">See All</button></Link>
+         <Link to='/services'><button className="btn btn-outline btn-error my-20 ">See All</button></Link>
          </div>
            {/* side img and text */}
           
            <div className="hero  min-h-screen bg-base-300">
            
   <div className="hero-content flex-col lg:flex-row">
-    <img src={doctorImg} alt='' className="max-w-sm rounded-lg shadow-2xl" />
-    <div>
-      <h1 className="text-5xl font-bold">My duty is to serve you</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+    <img src={doctorImg} alt='' className="w-1/3 rounded-lg shadow-2xl h-96 hover:h-full mr-10" />
+    <div className='w-1/3 '>
+      <h1 className="text-5xl font-bold"> DR JUNAED WORK</h1>
+      <p className="py-6">A memoir of internationally acclaimed heart surgeon DR junaed (1936-1991), written by his daughter and Foundation CEO, Nikola Tesla.Her book talks about his career in heart surgery and the first heart-lung transplant to the development of an artificial heart.</p>
       <button className="btn btn-primary">Get Started</button>
     </div>
   </div>
@@ -86,13 +86,16 @@ console.log('add srvic',orderedService)
             :
             ''
           }
+          <div className='text-center'>
+         <Link to='/services'><button className="btn btn-outline btn-error my-5 ">See All</button></Link>
+         </div>
          {/* 7 day free service */}
-          <div>
-          <div className="hero min-h-screen bg-base-300">
+         
+          <div className="hero min-h-screen bg-base-300 mb-20">
   <div className="hero-content flex-col lg:flex-row-reverse">
     <div className="text-center lg:text-left">
-      <h1 className="text-5xl font-bold">Register for<br/> first time free  advice</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      <h1 className="text-5xl font-bold">Register now online</h1>
+      <p className="py-6">Before applying, please read the selection criteria for the Victor Chang Surgical Fellowship before applying; this document also outlines acquittal procedures.</p>
     </div>
     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
@@ -118,7 +121,7 @@ console.log('add srvic',orderedService)
     </div>
   </div>
 </div>
-          </div>
+          
         </div>
     );
 };
